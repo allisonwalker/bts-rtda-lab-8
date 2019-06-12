@@ -45,6 +45,7 @@ services:
         environment:
             - "cluster.initial_master_nodes=elasticsearch"
             - "node.name=elasticsearch"
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         networks:
             - lampda-network
 
