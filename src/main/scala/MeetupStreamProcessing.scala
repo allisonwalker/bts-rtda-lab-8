@@ -1,4 +1,4 @@
-import models.{GTopicModel, MeetupModel, MemberName, VenueNameAndLocation}
+import models.{EventTopicCount, GTopicModel, MeetupModel, MemberName, VenueNameAndLocation}
 import org.apache.spark.sql.{Dataset, SparkSession}
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
@@ -35,20 +35,37 @@ class MeetupStreamProcessing (spark: SparkSession) {
       .as[GTopicModel]
   }
 
-  //To be implemented
+  //Exercise
   def extractVenueNameAndLocation(meetupStreamDataset: Dataset[MeetupModel]): Dataset[VenueNameAndLocation] = {
     import spark.implicits._
     return meetupStreamDataset
-      .map(meetup => (meetup.venue.venue_name, meetup.venue.lon.cast('String') +meetup.venue.lat.toString()))
-      .as[VenueNameAndLocation]
+      .map(meetup =>
+        VenueNameAndLocation(
+          meetup.venue.venue_name.getOrElse(""),
+          meetup.venue.lon.getOrElse(0.0) + "," + meetup.venue.lat.getOrElse(0.0)
+        )
+      ).as[VenueNameAndLocation]
   }
 
-  //To be implemented
+  //Exercise
   def extractMemberName(meetupStreamDataset: Dataset[MeetupModel]): Dataset[MemberName] = {
     import spark.implicits._
     return meetupStreamDataset
-      .map(meetup => meetup.member.member_name )
+      .map(meetup => MemberName(meetup.member.member_name.getOrElse("String")))
       .as[MemberName]
+
+  }
+
+  //Assignment
+  def extractEventTopicCount(meetupStreamDataset: Dataset[MeetupModel]): Dataset[EventTopicCount] = {
+    import spark.implicits._
+    return meetupStreamDataset
+      .map(meetup =>
+        EventTopicCount(
+          meetup.event.event_name,
+          meetup.group.group_topics.length
+        )
+      ).as[EventTopicCount]
 
   }
 
