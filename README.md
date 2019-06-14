@@ -66,7 +66,11 @@ PATH="/usr/local/sbt/bin:${PATH}"
 - Copy local app code to EC2 from a new console
 
 ```bash
-scp -r -i <your aws key> $(pwd) ec2-user@ec2-35-180-189-82.eu-west-3.compute.amazonaws.com:~/data
+scp -i <your aws key> -r $(pwd) ec2-user@ec2-35-180-189-82.eu-west-3.compute.amazonaws.com:~/data
+
+Example:
+
+scp -i ~/keys/liesner_key_par.pem -r $(pwd) ec2-user@ec2-35-180-189-82.eu-west-3.compute.amazonaws.com:~/data
 ``` 
 
 - Go back to your spark terminal build the sbt
@@ -78,7 +82,7 @@ sbt package
 
 - Submit app to spark cluster
 ```bash
-spark-submit --master local[2] --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0,org.apache.kafka:kafka-clients:2.2.0,org.apache.spark:spark-tags_2.11:2.4.0,org.apache.spark:spark-sql_2.11:2.4.0,org.elasticsearch:elasticsearch-spark-20_2.11:7.1.1 --class Main target/scala-2.11/bts-rtda-lab-8_2.11-0.1.1.jar kafka elasticsearch venues-name-location 
+spark-submit --master local[2] --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0,org.apache.kafka:kafka-clients:2.2.0,org.apache.spark:spark-tags_2.11:2.4.0,org.apache.spark:spark-sql_2.11:2.4.0,org.elasticsearch:elasticsearch-spark-20_2.11:7.1.1 --class Main target/scala-2.11/bts-rtda-lab-8_2.11-0.1.1.jar kafka elasticsearch meetup-topics 
 ```
 
 - Exercises: Base in the boilerplate project add to the app a new flow to
