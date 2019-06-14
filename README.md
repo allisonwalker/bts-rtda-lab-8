@@ -1,4 +1,3 @@
-
 - Launch/Describe/Terminate AWS Instance ( Big Data Arch )
 
 ```bash
@@ -92,11 +91,11 @@ spark-submit --master local[2] --packages org.apache.spark:spark-sql-kafka-0-10_
 
 - Check new created index "topics" on kibana and create a real time graphic.
 
-- Exercises: Base in the boilerplate project add to the app a new flow to
+- Exercises: Base in the boilerplate project add to the app a new pipelines:
     -  create and index in elasticserach named "membernames" wich contain the creators members names for each meetup. Create on kibana a realtime graphic that show the top members by name.
     -  create an index in elasticserach named "venuesnamelocation" which contain the venues an location (in the string format "lon,lat") for each meetup. Create on kibana a realtime graphic that show the top venues by name. 
 
-- Assignment: Base in the boilerplate project add to the app a new flow to   
+- Assignment: Base in the boilerplate project add to the app a new pipeline
     - Add to the app a new flow to create and index on elasticserach named "eventtopicount" witch contain the event name and the count of topics that the event contain. Create on kibana a realtime graphic that show the top events based on count of topics. 
 
 - After finish do not forget to end the EC2
