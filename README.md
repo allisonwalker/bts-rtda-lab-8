@@ -82,12 +82,11 @@ sbt package
 spark-submit --master local[2] --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0,org.apache.kafka:kafka-clients:2.2.0,org.apache.spark:spark-tags_2.11:2.4.0,org.apache.spark:spark-sql_2.11:2.4.0,org.elasticsearch:elasticsearch-spark-20_2.11:7.1.1 --class Main target/scala-2.11/bts-rtda-lab-8_2.11-0.1.1.jar kafka elasticsearch venues-name-location 
 ```
 
-- Exercises
+- Exercises: Base in the boilerplate project add to the app a new flow to
+    -  create and index in elasticserach named "membernames" wich contain the creators members names for each meetup. Create on kibana a realtime graphic that show the top members by name.
+    -  create an index in elasticserach named "venuesnamelocation" which contain the venues an location (in the string format "lon,lat") for each meetup. Create on kibana a realtime graphic that show the top venues by name. 
 
-    - Add to the app a new flow to create an index in elasticserach named "venuesnamelocation" which contain the venues an location (in the string format "lon,lat") for each meetup. Create on kibana a realtime graphic that show the top venues by name. 
-    - Add to the app a new flow to create and index in elasticserach named "membernames" wich contain the creators members names for each meetup. Create on kibana a realtime graphic that show the top members by name.
-
-- Assignment    
+- Assignment: Base in the boilerplate project add to the app a new flow to   
     - Add to the app a new flow to create and index on elasticserach named "eventtopicount" witch contain the event name and the count of topics that the event contain. Create on kibana a realtime graphic that show the top events based on count of topics. 
 
 - After finish do not forget to end the EC2
