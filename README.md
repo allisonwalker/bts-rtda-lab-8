@@ -17,7 +17,7 @@ aws ec2 describe-instances --filter "Name=instance-id,Values=<id-instance>"
 ssh -i <your-key-path> ec2-user@<intance-public-dns>
 ``` 
 
-- Inside instance, edit Spark Dockerfile and add a volumen on spark intance definition 
+- Inside instance, edit Spark Dockerfile and add a volume on spark instance definition to share data with spark container. 
 ```bash
 vi dpcker-compose.yml
  spark:
@@ -33,6 +33,8 @@ docker-compose rm
 docker-compose build
 ./start-docker-compose.sh
 ```
+
+- Check all nodes of the docker cluster are up
 
 ```bash
 docker-compose ps
