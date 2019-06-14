@@ -1,60 +1,71 @@
 import java.sql.{Date, Timestamp}
 
 import com.holdenkarau.spark.testing.{DatasetSuiteBase, StreamingSuiteBase}
-import models.MeetupModel
-import org.apache.spark.sql.Encoders
-import org.apache.spark.sql.streaming.{OutputMode}
+import models.{GTopicModel, MeetupModel}
+import org.apache.spark.sql.{Dataset, Encoders, Row}
+import org.apache.spark.sql.streaming.OutputMode
 import org.scalatest.FunSuite
 import org.apache.spark.sql.functions._
 import org.joda.time.DateTime
 
 class MeetupStreamProcessingTest  extends FunSuite with DatasetSuiteBase {
-  test("Initial load json array"){
+
+  def getTestDataStream(): Dataset[MeetupModel] ={
     import spark.implicits._
     val meetupModelSchema = Encoders.product[MeetupModel].schema
 
-    val defaultValue = spark.udf.register("defaultValue",()=> new Timestamp(new DateTime().getMillis))
-
-    val jsonDS = spark
-      .readStream
-      .option("multiLine", "true").schema(meetupModelSchema)
+    spark.readStream
+      .option("multiLine", "true")
+      .schema(meetupModelSchema)
       .json("data/").as[MeetupModel]
+  }
 
-    val venueCount = jsonDS
-      .withColumn("etime", defaultValue())
-      .withWatermark("etime", "4 seconds")
-      .groupBy(
-        window($"etime", "4 seconds", "1 seconds"),
-        $"venue"
-      ).agg(count($"venue").as("count"))
+  test("Test extract topics"){
+    //read test data
+    val meetupStreamDataset = getTestDataStream();
 
-    venueCount.writeStream
+    //Init meetup processor object
+    val meetupStreamProcessor = new MeetupStreamProcessing(spark);
+
+    // process meetup dataset
+    val result = meetupStreamProcessor.extractMeetupTopics(meetupStreamDataset)
+
+    //Write result to a temporal table "Output" in memory
+    result.writeStream
       .format("memory")
       .queryName("Output")
       .outputMode(OutputMode.Append())
       .start()
       .processAllAvailable();
 
-     assert(spark.sql("select * from Output").collectAsList.size() == 1)
+    //Check Output
+    val realOutput: Array[Row] = spark.sql("select * from Output").collect()
+
+    assert(realOutput.length == 21)
   }
 
-  test("Test read from meetup json test data"){
-    import spark.implicits._
-    val meetupModelSchema = Encoders.product[MeetupModel].schema
+  test("Test extract venues names and location"){
+    //read test data
+    val meetupStreamDataset = getTestDataStream();
 
-    val jsonDS = spark.readStream.option("multiLine", "true").schema(meetupModelSchema).json("data/").as[MeetupModel]
+    //Init meetup processor object
+    val meetupStreamProcessor = new MeetupStreamProcessing(spark);
 
-    val query = jsonDS.flatMap(meetup=>meetup.group.group_topics).groupByKey(t=>t.topic_name).count()
+    // process meetup dataset
+    val result = meetupStreamProcessor.extractVenueNameAndLocation(meetupStreamDataset)
 
-
-    query.writeStream
+    //Write result to a temporal table "Output" in memory
+    result.writeStream
       .format("memory")
       .queryName("Output")
-      .outputMode(OutputMode.Complete())
+      .outputMode(OutputMode.Append())
       .start()
       .processAllAvailable();
 
-    assert(spark.sql("select * from Output").collectAsList.size() == 11)
+    //Check Output
+    val realOutput: Array[Row] = spark.sql("select * from Output").collect()
+
+    assert(realOutput.length == 2)
   }
 
 }

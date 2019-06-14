@@ -29,8 +29,10 @@ RUN wget --no-verbose http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}
 
 #ENV PATH "$PATH:$/spark/bin"
 ENV PATH="/spark/bin:${PATH}"
+ENV PATH="/usr/local/sbt/bin:${PATH}"
 
 COPY start-master.sh /
+COPY . /appdata
 
 ENV SPARK_MASTER_PORT 7077
 ENV SPARK_MASTER_WEBUI_PORT 8080
