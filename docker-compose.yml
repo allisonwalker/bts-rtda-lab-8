@@ -12,6 +12,8 @@ services:
             SPARK_PUBLIC_DNS: spark
         networks:
             - lampda-network
+        volumes:
+            - ./data:/appdata
 
     zookeeper:
         image: wurstmeister/zookeeper

@@ -36,9 +36,20 @@ class MeetupStreamProcessing (spark: SparkSession) {
   }
 
   //To be implemented
-  def extractVenueNameAndLocation(meetupStreamDataset: Dataset[MeetupModel]): Dataset[VenueNameAndLocation] = ???
+  def extractVenueNameAndLocation(meetupStreamDataset: Dataset[MeetupModel]): Dataset[VenueNameAndLocation] = {
+    import spark.implicits._
+    return meetupStreamDataset
+      .map(meetup => (meetup.venue.venue_name, meetup.venue.lon.cast('String') +meetup.venue.lat.toString()))
+      .as[VenueNameAndLocation]
+  }
 
   //To be implemented
-  def extractMemberName(meetupStreamDataset: Dataset[MeetupModel]): Dataset[MemberName] = ???
+  def extractMemberName(meetupStreamDataset: Dataset[MeetupModel]): Dataset[MemberName] = {
+    import spark.implicits._
+    return meetupStreamDataset
+      .map(meetup => meetup.member.member_name )
+      .as[MemberName]
+
+  }
 
 }
