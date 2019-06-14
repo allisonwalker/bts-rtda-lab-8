@@ -5,6 +5,7 @@ import org.json4s.jackson.JsonMethods._
 
 class MeetupStreamProcessing (spark: SparkSession) {
 
+  //Method to connect to kafka topic stream and produce a Dataset[String] taking the value field.
   def connectToKafkaStreamAndGetStringDatasetFromValue(kafkaHost: String): Dataset[String] = {
     import spark.implicits._
     val kafkaStreamStringDataset = spark
@@ -17,12 +18,14 @@ class MeetupStreamProcessing (spark: SparkSession) {
     return kafkaStreamStringDataset
   }
 
+  //Transformation method
   def transformFromStringDatasetToMeetupmodelDataset(kafkaStreamStringDataset: Dataset[String]): Dataset[MeetupModel] = {
     import spark.implicits._
     val dsMeetups = kafkaStreamStringDataset
       .map(r=> { implicit val formats = DefaultFormats; parse(r).extract[MeetupModel] } )
     return dsMeetups
   }
+
 
   //Processing methods
   def extractMeetupTopics(meetupStreamDataset: Dataset[MeetupModel]): Dataset[GTopicModel] = {
@@ -32,9 +35,10 @@ class MeetupStreamProcessing (spark: SparkSession) {
       .as[GTopicModel]
   }
 
-  //Processing methods
+  //To be implemented
   def extractVenueNameAndLocation(meetupStreamDataset: Dataset[MeetupModel]): Dataset[VenueNameAndLocation] = ???
 
+  //To be implemented
   def extractMemberName(meetupStreamDataset: Dataset[MeetupModel]): Dataset[MemberName] = ???
 
 }
