@@ -17,20 +17,7 @@ aws ec2 describe-instances --filter "Name=instance-id,Values=<id-instance>"
 ssh -i <your-key-path> ec2-user@<intance-public-dns>
 ``` 
 
-- Inside instance 
-```text
-docker-compose ps
-```
-
-- If docker-compose do not start automatically we net to delete created networks
-
-```
-sudo docker network ls
-sudo docker network rm <network ID>
-```
-
-
-- Edit Spark Dockerfile and add a volumen on spark intance definition 
+- Inside instance, edit Spark Dockerfile and add a volumen on spark intance definition 
 ```bash
 vi dpcker-compose.yml
  spark:
@@ -47,7 +34,21 @@ docker-compose build
 ./start-docker-compose.sh
 ```
 
-- Start producing mesages to kafka from meetup url
+```bash
+docker-compose ps
+```
+
+- If docker-compose do start due to error duplication we need to delete duplicate networks
+
+```bash
+sudo docker network ls
+sudo docker network rm <network ID>
+
+./start-docker-compose.sh
+```
+
+
+- Start producing mesages to kafka from meetup url, being in EC2 console do:
 
 ```bash
 docker exec -it ec2-user_sensor_1 /bin/sh
@@ -62,6 +63,8 @@ curl -i http://stream.meetup.com/2/rsvps | kafkacat -b kafka:9092 -t stream
 docker exec -it spark bash
 PATH="/usr/local/sbt/bin:${PATH}"
 ```
+
+- Open a new terminal and enter to the amazon EC2 follow previous approach
 
 - Copy local app code to EC2 from a new console
 
@@ -84,6 +87,8 @@ sbt package
 ```bash
 spark-submit --master local[2] --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0,org.apache.kafka:kafka-clients:2.2.0,org.apache.spark:spark-tags_2.11:2.4.0,org.apache.spark:spark-sql_2.11:2.4.0,org.elasticsearch:elasticsearch-spark-20_2.11:7.1.1 --class Main target/scala-2.11/bts-rtda-lab-8_2.11-0.1.1.jar kafka elasticsearch meetup-topics 
 ```
+
+- Check new created index "topics" on kibana and create a real time graphic.
 
 - Exercises: Base in the boilerplate project add to the app a new flow to
     -  create and index in elasticserach named "membernames" wich contain the creators members names for each meetup. Create on kibana a realtime graphic that show the top members by name.
