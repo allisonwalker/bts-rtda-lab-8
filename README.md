@@ -45,7 +45,6 @@ docker-compose stop
 docker-compose rm
 docker-compose build
 ./start-docker-compose.sh
-./
 ```
 
 - Start producing mesages to kafka from meetup url
@@ -70,7 +69,7 @@ PATH="/usr/local/sbt/bin:${PATH}"
 scp -r -i <your aws key> $(pwd) ec2-user@ec2-35-180-189-82.eu-west-3.compute.amazonaws.com:~/data
 ``` 
 
-- Go to your spark terminal build the sbt
+- Go back to your spark terminal build the sbt
 
 ```bash
 cd /appdata
