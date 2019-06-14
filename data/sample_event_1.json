@@ -1,0 +1,76 @@
+{
+  "venue": {
+    "venue_name": "Sam Corey Senior Center",
+    "lon": -84.51841,
+    "lat": 42.64366,
+    "venue_id": 25727187
+  },
+  "visibility": "public",
+  "response": "yes",
+  "guests": 0,
+  "member": {
+    "member_id": 213013899,
+    "photo": "https:\/\/secure.meetupstatic.com\/photos\/member\/7\/e\/5\/0\/thumb_284192336.jpeg",
+    "member_name": "Julie"
+  },
+  "rsvp_id": 1791699008,
+  "mtime": 1560475784000,
+  "event": {
+    "event_name": "Euchre, Holt Kiwanis, Sam Corey Senior Center (Holt)",
+    "event_id": "wfvvhpyzjbsb",
+    "time": 1560551400000,
+    "event_url": "https:\/\/www.meetup.com\/Casual-Cards\/events\/261768176\/"
+  },
+  "group": {
+    "group_topics": [
+      {
+        "urlkey": "euchre-tournament",
+        "topic_name": "Euchre Tournament"
+      },
+      {
+        "urlkey": "euchre-with-the-locals",
+        "topic_name": "Euchre with the Locals"
+      },
+      {
+        "urlkey": "learn-to-play-euchre",
+        "topic_name": "Learn to play Euchre"
+      },
+      {
+        "urlkey": "gaming",
+        "topic_name": "Gaming"
+      },
+      {
+        "urlkey": "meet-new-friends-with-euchre",
+        "topic_name": "Meet new friends with Euchre"
+      },
+      {
+        "urlkey": "cards",
+        "topic_name": "Cards"
+      },
+      {
+        "urlkey": "cardgame",
+        "topic_name": "Card Games"
+      },
+      {
+        "urlkey": "euchre",
+        "topic_name": "Euchre"
+      },
+      {
+        "urlkey": "euchre-players",
+        "topic_name": "Euchre Players"
+      },
+      {
+        "urlkey": "meet-people",
+        "topic_name": "Meet People"
+      }
+    ],
+    "group_city": "Lansing",
+    "group_country": "us",
+    "group_id": 3856342,
+    "group_name": "Casual Cards",
+    "group_lon": -84.55,
+    "group_urlname": "Casual-Cards",
+    "group_state": "MI",
+    "group_lat": 42.7
+  }
+}

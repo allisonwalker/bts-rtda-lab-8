@@ -1,0 +1,80 @@
+{
+  "venue": {
+    "venue_name": "Dr. Martin Luther King, Jr. Library",
+    "lon": -121.885,
+    "lat": 37.335506,
+    "venue_id": 26020402
+  },
+  "visibility": "public",
+  "response": "yes",
+  "guests": 0,
+  "member": {
+    "member_id": 5189189,
+    "photo": "https:\/\/secure.meetupstatic.com\/photos\/member\/7\/1\/3\/6\/thumb_2788982.jpeg",
+    "member_name": "Craig M."
+  },
+  "rsvp_id": 1791022331,
+  "mtime": 1560149574583,
+  "event": {
+    "event_name": "Pre - Hacker SummerCamp Meeting - Mini CTF",
+    "event_id": "262182460",
+    "time": 1563051600000,
+    "event_url": "https:\/\/www.meetup.com\/pacifichackers\/events\/262182460\/"
+  },
+  "group": {
+    "group_topics": [
+      {
+        "urlkey": "web-security",
+        "topic_name": "Web Security"
+      },
+      {
+        "urlkey": "network-security",
+        "topic_name": "Network Security"
+      },
+      {
+        "urlkey": "hacking",
+        "topic_name": "Hacking"
+      },
+      {
+        "urlkey": "information-security",
+        "topic_name": "Information Security"
+      },
+      {
+        "urlkey": "software-security",
+        "topic_name": "Software Security"
+      },
+      {
+        "urlkey": "computer-security",
+        "topic_name": "Computer Security"
+      },
+      {
+        "urlkey": "penetration-testing",
+        "topic_name": "Penetration Testing"
+      },
+      {
+        "urlkey": "infosec",
+        "topic_name": "infosec"
+      },
+      {
+        "urlkey": "cybersecurity",
+        "topic_name": "Cybersecurity"
+      },
+      {
+        "urlkey": "web-application-security",
+        "topic_name": "Web Application Security"
+      },
+      {
+        "urlkey": "security-devices",
+        "topic_name": "Security Devices"
+      }
+    ],
+    "group_city": "Sunnyvale",
+    "group_country": "us",
+    "group_id": 21220034,
+    "group_name": "Pacific Hackers Meetup",
+    "group_lon": -122.03,
+    "group_urlname": "pacifichackers",
+    "group_state": "CA",
+    "group_lat": 37.37
+  }
+}

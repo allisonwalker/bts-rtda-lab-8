@@ -65,8 +65,6 @@ docker exec -it spark bash
 PATH="/usr/local/sbt/bin:${PATH}"
 ```
 
-- Open a new terminal and enter to the amazon EC2 follow previous approach
-
 - Copy local app code to EC2 from a new console
 
 ```bash
